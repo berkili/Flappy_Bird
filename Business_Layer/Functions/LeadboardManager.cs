@@ -23,6 +23,7 @@ namespace Business_Layer.Functions
         /// <returns></returns>
         public static List<ScoreLeadboard> Leadboards()
         {
+            ScoreLeadboards.Clear();
             int i = 1;
             foreach (var item in DataManager.scores.OrderByDescending(m => m.Score).Take(10))
             {

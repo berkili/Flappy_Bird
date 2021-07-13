@@ -82,7 +82,7 @@
 
         <Image Stretch="Fill" Name="flappyBird" Height="37" Width="50" Source="/Images/flappyBird.png" Canvas.Left="20" Canvas.Top="174" />
 
-        <Canvas Name="GameOverCanvas" Visibility="Hidden" Height="283" Width="193" Canvas.Left="156" Canvas.Top="96" Background="#aaf0f8ff">
+        <Canvas Name="GameOverCanvas" Height="283" Width="193" Canvas.Left="156" Canvas.Top="96" Background="#aaf0f8ff">
             <Label Name="finishText" FontSize="20" Content="Oyun Bitti!" Canvas.Left="41" Canvas.Top="27" FontWeight="Bold" />
             <Button x:Name="restartButton" Content="Tekrar Oyna" Canvas.Left="25" Canvas.Top="132" Height="38" Width="114" Padding="10" Background="#FF64CCF1"
                 Foreground="White"

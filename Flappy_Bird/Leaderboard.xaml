@@ -70,7 +70,7 @@
                 FontSize="16" Style="{DynamicResource RoundedButtonStyle}" Click="menuButton_Click"/>
         <Label Content="Label" HorizontalAlignment="Left" Margin="638,245,0,0" VerticalAlignment="Top"/>
         <DataGrid x:Name="leaderboard" HorizontalAlignment="Center" Height="331" Margin="0,55,0,0" VerticalAlignment="Top" Width="422"
-                  ColumnWidth="131" RowHeight="30"  Background="Gray" Foreground="Black" RowBackground="LightBlue" IsReadOnly="True" 
+                  ColumnWidth="*" RowHeight="30"  Background="Gray" Foreground="Black" RowBackground="LightBlue" IsReadOnly="True" 
                   FrozenColumnCount="2" AreRowDetailsFrozen="True" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserSortColumns="False"
                   BorderBrush="Gray" BorderThickness="5" HeadersVisibility="Column"/>
         <Label Content="Liderlik Tablosu" HorizontalAlignment="Center" Margin="0,16,0,0" VerticalAlignment="Top" FontSize="22"/>
