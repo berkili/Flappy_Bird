@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Flappy_Bird"
         mc:Ignorable="d"
-        Title="GameScreen" ResizeMode="NoResize" Height="490" Width="525" Background="LightBlue"  FocusManager.FocusedElement="{Binding ElementName=GameCanvas}" KeyDown="Canvas_KeyisDown" KeyUp="Canvas_KeyisUp"
-        WindowStartupLocation="CenterScreen">
+        Title="Flappy Bird" ResizeMode="NoResize" Height="490" Width="525" Background="LightBlue"  FocusManager.FocusedElement="{Binding ElementName=GameCanvas}" KeyDown="Canvas_KeyisDown" KeyUp="Canvas_KeyisUp"
+        WindowStartupLocation="CenterScreen" Icon="/Images/icon.png">
     <Window.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
