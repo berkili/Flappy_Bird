@@ -56,7 +56,6 @@ namespace Flappy_Bird
         public GameScreen()
         {
             InitializeComponent();
-
             
             gameTimer.Tick += gameEngine; 
             gameTimer.Interval = TimeSpan.FromMilliseconds(20); 
