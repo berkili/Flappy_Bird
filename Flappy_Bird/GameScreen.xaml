@@ -1,0 +1,110 @@
+﻿<Window x:Class="Flappy_Bird.GameScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Flappy_Bird"
+        mc:Ignorable="d"
+        Title="GameScreen" ResizeMode="NoResize" Height="490" Width="525" Background="LightBlue"  FocusManager.FocusedElement="{Binding ElementName=GameCanvas}" KeyDown="Canvas_KeyisDown" KeyUp="Canvas_KeyisUp"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style x:Key="RoundedButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" CornerRadius="20" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true" Margin="0,0,-29,0">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#EAB01E"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#EAB01E"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#F1CA68"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#F1CA68"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Canvas Name="GameCanvas" Focusable="True" Background="LightBlue">
+
+        <Image Height="145" Width="207" Source="/Images/clouds.png" Canvas.Left="20" Canvas.Top="10" Tag="clouds"/>
+        <Image Height="145" Width="207" Source="/Images/clouds2.png" Canvas.Left="300" Canvas.Top="96" Tag="clouds"/>
+
+        <Image Height="389" Width="75" Source="/Images/pipeBottom.png"  Canvas.Left="107" Canvas.Top="283" Tag="obs1-bot"/>
+        <Image Height="387" Width="66" Source="/Images/pipeTop.png" Canvas.Left="112" Canvas.Top="-245" Tag="obs1-top"/>
+
+        <Image Height="389" Width="75" Source="/Images/pipeBottom.png"  Canvas.Left="280" Canvas.Top="327" Tag="obs2-bot"/>
+        <Image Height="387" Width="66" Source="/Images/pipeTop.png" Canvas.Left="285" Canvas.Top="-176" Tag="obs2-top"/>
+
+        <Image Height="389" Width="75" Source="/Images/pipeBottom.png"  Canvas.Left="451" Canvas.Top="224" Tag="obs3-bot"/>
+        <Image Height="387" Width="66" Source="/Images/pipeTop.png" Canvas.Left="456" Canvas.Top="-291" Tag="obs3-top"/>
+
+        <Label Name="scoreText" FontSize="22" Content="Score: 0" Canvas.Left="10" Canvas.Top="3" FontWeight="Black" RenderTransformOrigin="0.418,-0.507"/>
+
+        <Image Stretch="Fill" Name="flappyBird" Height="37" Width="50" Source="/Images/flappyBird.png" Canvas.Left="20" Canvas.Top="174" />
+
+        <Canvas Name="GameOverCanvas" Visibility="Hidden" Height="283" Width="193" Canvas.Left="156" Canvas.Top="96" Background="#aaf0f8ff">
+            <Label Name="finishText" FontSize="20" Content="Oyun Bitti!" Canvas.Left="41" Canvas.Top="27" FontWeight="Bold" />
+            <Button x:Name="restartButton" Content="Tekrar Oyna" Canvas.Left="25" Canvas.Top="132" Height="38" Width="114" Padding="10" Background="#FF64CCF1"
+                Foreground="White"
+                FontFamily="Arial"
+                FontSize="16" Style="{DynamicResource RoundedButtonStyle}" Click="restartButton_Click"/>
+            <Button x:Name="menuButton" Content="Ana Menü" Canvas.Left="25" Canvas.Top="235" Height="38" Width="114" Padding="10" Background="#FF64CCF1"
+                Foreground="White"
+                FontFamily="Arial"
+                FontSize="16" Style="{DynamicResource RoundedButtonStyle}" Click="menuButton_Click"/>
+            <Label x:Name="score1Text" FontSize="20" Content="" Canvas.Left="47" Canvas.Top="75" Width="100" />
+            <Button x:Name="openSaveButton" Content="Skorunu Kaydet" Height="38" Canvas.Left="25" Canvas.Top="185" Width="114" Padding="10" Background="#FF64CCF1"
+                Foreground="White"
+                FontFamily="Arial"
+                FontSize="16" Style="{DynamicResource RoundedButtonStyle}" Click="openSaveButton_Click" RenderTransformOrigin="-0.604,-1.036"/>
+        </Canvas>
+
+        <Canvas Name="SaveCanvas" Height="270" Width="193" Canvas.Left="156" Canvas.Top="96" Background="#aaf0f8ff">
+
+            <TextBox x:Name="adTextBox" Canvas.Left="40" Canvas.Top="148" TextWrapping="Wrap" Width="114" Text="Player1" RenderTransformOrigin="0.509,-0.454" Height="22" TextAlignment="Center"/>
+            <Label x:Name="nameLabel" Content="Nickname" Canvas.Left="63" Canvas.Top="109" FontWeight="Bold"/>
+            <Button x:Name="saveButton" Content="Kaydet" Height="20" Canvas.Left="56" Canvas.Top="191" Width="82" Click="saveButton_Click" Background="#0069D9" Foreground="White"/>
+            <Label Content="Skorunu Kaydet" Canvas.Left="35" Canvas.Top="20" FontWeight="Bold" FontSize="15"/>
+        </Canvas>
+    </Canvas>
+</Window>
